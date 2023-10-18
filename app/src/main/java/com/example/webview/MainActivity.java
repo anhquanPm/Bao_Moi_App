@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -110,7 +112,15 @@ public class MainActivity extends AppCompatActivity {
             webview.goBack();
         }
         else{
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Bạn muốn thoát khỏi ứng dụng ?")
+                    .setNegativeButton("Không", null)
+                    .setPositiveButton("Đúng", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finishAffinity();
+                        }
+                    }).show();
         }
     }
 
