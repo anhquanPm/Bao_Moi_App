@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Quay lại"
+        android:id="@+id/nav_previous"
+        app:showAsAction="always"
+        android:icon="@drawable/icons8_back_24"
+        />
+
+    <item android:title="Kế tiếp"
+        android:id="@+id/nav_next"
+        app:showAsAction="always"
+        android:icon="@drawable/icons8_next_24"
+        />
+
+    <item android:title="Tải lại"
+        android:id="@+id/nav_resert"
+        app:showAsAction="always"
+        android:icon="@drawable/icons8_reload_24"
+        />
+
+</menu>

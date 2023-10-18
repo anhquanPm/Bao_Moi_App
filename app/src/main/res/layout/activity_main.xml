@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/xam"
+    tools:context=".MainActivity"
+    tools:ignore="MissingClass">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-3dp"
+        android:progress="20"
+        android:progressBackgroundTint="#00BCD4"
+        android:progressTint="#2196F3"
+        android:visibility="gone" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/no_connection_logo"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/img_3" />
+
+        <TextView
+            android:id="@+id/txt_no_connecttion"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:text="Không có kết nối internet"
+            android:layout_below="@+id/no_connection_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_Retry"
+            android:text="Thử lại"
+            android:textSize="20sp"
+            android:layout_below="@id/txt_no_connecttion"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_width="140dp"
+            android:layout_height="65dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/custom_button"/>
+
+    </RelativeLayout>
+</LinearLayout>
