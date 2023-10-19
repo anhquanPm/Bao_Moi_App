@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +17,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Contacts;
 import android.sax.RootElement;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -24,6 +29,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
+import android.webkit.DownloadListener;
+import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -34,6 +42,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 public class MainActivity extends AppCompatActivity {
     WebView webview;
@@ -42,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout relativeLayout;
     Button btn_restry;
     SwipeRefreshLayout swipeRefreshLayout;
-    private String WebUrl = "https://baomoi.com/";
+    private String WebUrl = "https://baomoi.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // nút restry khi app bị mất kết nối mạng
         btn_restry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +136,46 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 webview.reload();
+            }
+        });
+
+
+        webview.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String s, String s1, String s2, String s3, long l) {
+                Dexter.withActivity(MainActivity.this)
+                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(s));
+                                request.setMimeType(s3);
+                                String cookies = CookieManager.getInstance().getCookie(s1);
+                                request.addRequestHeader("cookie", cookies);
+                                request.addRequestHeader("User_Agent", s1);
+                                request.setDescription("Đang tải file...");
+                                request.setTitle(URLUtil.guessFileName(s,s2,s3));
+                                request.allowScanningByMediaScanner();
+                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                request.setDestinationInExternalPublicDir(
+                                        Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(
+                                                s,s2,s3));
+                                DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                                downloadManager.enqueue(request);
+                                Toast.makeText(MainActivity.this, "Đang tải file...", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
+                            }
+                        }).check();
             }
         });
 
