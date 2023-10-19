@@ -3,6 +3,7 @@ package com.example.webview;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     RelativeLayout relativeLayout;
     Button btn_restry;
+    SwipeRefreshLayout swipeRefreshLayout;
     private String WebUrl = "https://baomoi.com/";
 
     @Override
@@ -63,9 +65,19 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Bạn chờ chút...");
         relativeLayout = findViewById(R.id.relativeLayout);
         btn_restry = findViewById(R.id.btn_Retry);
+        swipeRefreshLayout = findViewById(R.id.swipeRefeshLayout);
+        // tạo màu sắc cho hiệu ứng load khi tại lại trang
+        swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.YELLOW, Color.GREEN, Color.RED);
 
 
         webview.setWebViewClient(new WebViewClient(){
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                swipeRefreshLayout.setRefreshing(false);
+                super.onPageFinished(view, url);
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -99,6 +111,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkConnection();
+            }
+        });
+
+        // sử dụng swipeRefreshLayout để load lại webView bừng cử chỉ vuốt
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                webview.reload();
             }
         });
 
