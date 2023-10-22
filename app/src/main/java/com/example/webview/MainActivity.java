@@ -44,6 +44,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Circle;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     WebView webview;
     ProgressBar progressBar;
     ProgressDialog progressDialog;
+
     RelativeLayout relativeLayout;
     Button btn_restry;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -71,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loadView();
         checkConnection();
+
+//        if(savedInstanceState != null){
+//            webview.restoreState(savedInstanceState);
+//        }else{
+
+//        }
     }
 
     private void loadView(){
@@ -79,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Bạn chờ chút...");
+
         relativeLayout = findViewById(R.id.relativeLayout);
         btn_restry = findViewById(R.id.btn_Retry);
         swipeRefreshLayout = findViewById(R.id.swipeRefeshLayout);
-        // tạo màu sắc cho hiệu ứng load khi tại lại trang
-        swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.YELLOW, Color.GREEN, Color.RED);
+        // tạo màu sắc cho hiệu ứng load khi tải lại trang
+        swipeRefreshLayout.setColorSchemeColors(Color.GREEN, Color.YELLOW, Color.RED, Color.RED);
 
 
         webview.setWebViewClient(new WebViewClient(){
@@ -178,9 +189,6 @@ public class MainActivity extends AppCompatActivity {
                         }).check();
             }
         });
-
-
-
     }
 
     @Override
@@ -244,4 +252,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+//    @Override
+//    protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        webview.saveState(outState);
+//        super.onSaveInstanceState(outState);
+//    }
 }

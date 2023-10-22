@@ -16,16 +16,25 @@
         android:layout_height="300dp"
         android:padding="50dp"/>
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="220dp"
-        android:layout_height="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="150dp"
-        android:indeterminate="true"
-        android:max="100"
-        android:progress="0"
-        android:progressBackgroundTint="#FF9800"
-        android:progressTint="#FF5722" />
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/progressBar"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="#FF5722" />
+
+    <!--    <ProgressBar-->
+<!--        style="?android:attr/progressBarStyleHorizontal"-->
+<!--        android:layout_width="220dp"-->
+<!--        android:layout_height="10dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="150dp"-->
+<!--        android:indeterminate="true"-->
+<!--        android:max="100"-->
+<!--        android:progress="0"-->
+<!--        android:progressBackgroundTint="#FF9800"-->
+<!--        android:progressTint="#FF5722" />-->
 
 </LinearLayout>

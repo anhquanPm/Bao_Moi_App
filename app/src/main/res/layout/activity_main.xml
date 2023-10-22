@@ -13,16 +13,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ProgressBar
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progressBar"-->
+<!--            style="?android:attr/progressBarStyleHorizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="-3dp"-->
+<!--            android:progress="20"-->
+<!--            android:progressBackgroundTint="#00BCD4"-->
+<!--            android:progressTint="#2196F3"-->
+<!--            android:visibility="gone" />-->
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-3dp"
-            android:progress="20"
-            android:progressBackgroundTint="#00BCD4"
-            android:progressTint="#2196F3"
-            android:visibility="gone" />
+            android:layout_gravity="center"
+            app:SpinKit_Color="#FF5722"
+            android:visibility="gone"/>
 
         <WebView
             android:id="@+id/webview"
