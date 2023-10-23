@@ -42,4 +42,5 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     implementation ("com.karumi:dexter:6.2.3")
     implementation ("com.github.ybq:Android-SpinKit:1.4.0")
+    implementation ("com.github.d-max:spots-dialog:0.4@aar")
 }

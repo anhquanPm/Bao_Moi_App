@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Custom" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowBackground">@color/blue</item>
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Bạn chờ chút...</item>
+        <item name="android:windowTitleStyle">@android:color/holo_orange_dark</item>
+        <item name="DialogSpotColor">@android:color/holo_orange_dark</item>
+        <item name="DialogSpotCount">5</item>
+    </style>
+
+</resources>

@@ -54,10 +54,12 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import dmax.dialog.SpotsDialog;
+
 public class MainActivity extends AppCompatActivity {
     WebView webview;
     ProgressBar progressBar;
-    ProgressDialog progressDialog;
+    AlertDialog progressDialog;
 
     RelativeLayout relativeLayout;
     Button btn_restry;
@@ -75,20 +77,15 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loadView();
         checkConnection();
-
-//        if(savedInstanceState != null){
-//            webview.restoreState(savedInstanceState);
-//        }else{
-
-//        }
     }
 
     private void loadView(){
         webview = findViewById(R.id.webview);
 
         progressBar = findViewById(R.id.progressBar);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Bạn chờ chút...");
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Bạn chờ chút...");
+        progressDialog = new SpotsDialog(this, R.style.Custom);
 
         relativeLayout = findViewById(R.id.relativeLayout);
         btn_restry = findViewById(R.id.btn_Retry);
@@ -253,9 +250,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        webview.saveState(outState);
-//        super.onSaveInstanceState(outState);
-//    }
 }
